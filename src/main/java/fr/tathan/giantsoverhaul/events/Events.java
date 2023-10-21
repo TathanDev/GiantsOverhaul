@@ -4,6 +4,7 @@ import fr.tathan.giantsoverhaul.Config;
 import fr.tathan.giantsoverhaul.GiantsOverhaul;
 import fr.tathan.giantsoverhaul.mixin.GiantMixin;
 import fr.tathan.giantsoverhaul.util.Methods;
+import net.minecraft.client.model.GiantZombieModel;
 import net.minecraft.client.model.ZombieModel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -12,12 +13,15 @@ import net.minecraft.server.commands.WeatherCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Giant;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
@@ -71,5 +75,11 @@ public class Events {
                 giant.getPersistentData().putBoolean("HasSetRain", true);
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {
+        event.register(EntityType.GIANT, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                Animal::checkMobSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

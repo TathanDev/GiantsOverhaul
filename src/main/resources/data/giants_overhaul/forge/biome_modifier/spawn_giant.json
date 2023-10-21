@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#giants_overhault:giant_spawn_biomes",
+  "spawners": {
+    "type": "minecraft:giant",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
