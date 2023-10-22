@@ -1,7 +1,8 @@
 package fr.tathan.giantsoverhaul;
 
 import com.mojang.logging.LogUtils;
-import fr.tathan.giantsoverhaul.events.Events;
+import fr.tathan.giantsoverhaul.common.registries.EntityRegistry;
+import fr.tathan.giantsoverhaul.common.registries.TagRegistry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,7 +24,8 @@ public class GiantsOverhaul {
     public GiantsOverhaul() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //EntityRegistry.ENTITIES.register(modEventBus);
+        EntityRegistry.ENTITIES.register(modEventBus);
+        TagRegistry.init();
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 

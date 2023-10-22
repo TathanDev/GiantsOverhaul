@@ -1,4 +1,4 @@
-package fr.tathan.giantsoverhaul.goals;
+package fr.tathan.giantsoverhaul.common.goals;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
