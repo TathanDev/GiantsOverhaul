@@ -27,7 +27,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:trident",
+          "name": "minecraft:netherite_sword",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -36,17 +36,12 @@
             {
               "function": "minecraft:set_enchantments",
               "enchantments": {
-                "minecraft:loyalty": 3,
+                "minecraft:knockback": 2,
                 "minecraft:unbreaking": 3,
-                "minecraft:channeling": 1,
-                "minecraft:mending": 1,
-                "minecraft:impaling": 5
+                "minecraft:sharpness": 5,
+                "minecraft:mending": 1
               },
               "add": true
-            },
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": 0
             }
           ]
         }

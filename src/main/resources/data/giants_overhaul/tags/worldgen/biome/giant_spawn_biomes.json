@@ -1,7 +1,7 @@
 {
   "values": [
     "#minecraft:is_hill",
-    "#minecraft:is_savana",
+    "#minecraft:is_savanna",
     "#minecraft:is_mountain"
   ]
 }
