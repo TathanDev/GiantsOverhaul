@@ -1,9 +1,7 @@
 package fr.tathan.giantsoverhaul.common.goals;
 
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.monster.Giant;
-import net.minecraft.world.entity.monster.Zombie;
 
 public class GiantAttackGoal extends MeleeAttackGoal {
 
@@ -27,6 +25,7 @@ public class GiantAttackGoal extends MeleeAttackGoal {
 
     public void tick() {
         super.tick();
+
         ++this.raiseArmTicks;
         if (this.raiseArmTicks >= 5 && this.getTicksUntilNextAttack() < this.getAttackInterval() / 2) {
             this.giant.setAggressive(true);

@@ -1,5 +1,6 @@
 package fr.tathan.giantsoverhaul.common.entity;
 
+import fr.tathan.giantsoverhaul.common.util.Methods;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvents;
@@ -11,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
@@ -31,6 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
 public class GiantDrownedEntity extends Zombie implements RangedAttackMob {
+
     public GiantDrownedEntity(EntityType<? extends Zombie> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -55,14 +56,7 @@ public class GiantDrownedEntity extends Zombie implements RangedAttackMob {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return  (Monster.createMonsterAttributes()
-                .add(Attributes.FOLLOW_RANGE, 35.0D)
-                .add(Attributes.MOVEMENT_SPEED, (double)0.23F)
-                .add(Attributes.ATTACK_KNOCKBACK, 1.5D)
-                .add(Attributes.ATTACK_DAMAGE, 15.0D)
-                .add(Attributes.ARMOR, 2.0D)
-                .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE)
-                .add(Attributes.MAX_HEALTH, 100.0D));
+        return Methods.giantsAttributes();
     }
 
     @Override

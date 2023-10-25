@@ -8,8 +8,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Giant;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -105,5 +108,16 @@ public class Methods {
             Methods.setThunder(level);
             giant.getPersistentData().putBoolean("HasSetRain", true);
         }
+    }
+
+    public static AttributeSupplier.Builder giantsAttributes(){
+        return (Monster.createMonsterAttributes()
+                .add(Attributes.FOLLOW_RANGE, 60.0D)
+                .add(Attributes.MOVEMENT_SPEED, (double)0.30F)
+                .add(Attributes.ATTACK_KNOCKBACK, 1.5D)
+                .add(Attributes.ATTACK_DAMAGE, 15.0D)
+                .add(Attributes.ARMOR, 4.0D)
+                .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE)
+                .add(Attributes.MAX_HEALTH, 100.0D));
     }
 }
