@@ -17,17 +17,21 @@ public class Config
     private static final ForgeConfigSpec.IntValue EFFECT_RADIUS = BUILDER
             .comment("The radius of the effect when the Giant give an effects to entities")
             .defineInRange("effectRadius", 260, 1,  Integer.MAX_VALUE);
+    private static final ForgeConfigSpec.IntValue FIRE_TIME = BUILDER
+            .comment("How long the player should be on fire against the Giant Husk")
+            .defineInRange("huskFireTime", 15, 1,  Integer.MAX_VALUE);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static int numberOfZombies;
     public static int effectRadius;
-
+    public static int huskFireTime;
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
 
         numberOfZombies = NUMBERS_OF_ZOMBIES_SUMMONED.get();
         effectRadius = EFFECT_RADIUS.get();
+        huskFireTime = FIRE_TIME.get();
     }
 }

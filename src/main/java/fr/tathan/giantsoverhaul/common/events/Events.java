@@ -12,6 +12,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Giant;
+import net.minecraft.world.entity.monster.Husk;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -78,5 +79,7 @@ public class Events {
         event.register(EntityRegistry.GIANT_DROWNED.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 GiantDrownedEntity::checkDrownedSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
 
+        event.register(EntityRegistry.GIANT_HUSK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                GiantHuskEntity::checkHuskSpawnRules, SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 }

@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.monster.Husk;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
@@ -62,22 +63,8 @@ public class GiantHuskEntity extends Zombie {
     }
 
 
-    public static boolean checkDrownedSpawnRules(EntityType<GiantHuskEntity> pDrowned, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
-        if (!pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER)) {
-            return false;
-        } else {
-            Holder<Biome> holder = pServerLevel.getBiome(pPos);
-            boolean flag = pServerLevel.getDifficulty() != Difficulty.PEACEFUL && (pMobSpawnType == MobSpawnType.SPAWNER || pServerLevel.getFluidState(pPos).is(FluidTags.WATER));
-            if (holder.is(BiomeTags.MORE_FREQUENT_DROWNED_SPAWNS)) {
-                return pRandom.nextInt(15) == 0 && flag;
-            } else {
-                return pRandom.nextInt(40) == 0 && isDeepEnoughToSpawn(pServerLevel, pPos) && flag;
-            }
-        }
-    }
-
-    private static boolean isDeepEnoughToSpawn(LevelAccessor pLevel, BlockPos pPos) {
-        return pPos.getY() < pLevel.getSeaLevel() - 5;
+    public static boolean checkHuskSpawnRules(EntityType<GiantHuskEntity> pHusk, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return checkMonsterSpawnRules(pHusk, pLevel, pSpawnType, pPos, pRandom) && (pSpawnType == MobSpawnType.SPAWNER || pLevel.canSeeSky(pPos));
     }
 
 
