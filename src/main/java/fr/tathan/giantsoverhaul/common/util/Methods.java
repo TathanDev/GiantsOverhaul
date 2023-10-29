@@ -162,6 +162,7 @@ public class Methods {
     }
 
     public static void addTagsToGiants(Entity entity){
+        //TODO BETTER System for this
         if (entity instanceof Giant giant) {
             giant.getPersistentData().putBoolean("HasSetRain", false);
             giant.getPersistentData().putBoolean("HasSummoned", false);
@@ -172,7 +173,11 @@ public class Methods {
             giant.getPersistentData().putBoolean("HasSetRain", false);
             giant.getPersistentData().putBoolean("HasSummoned", false);
             giant.getPersistentData().putBoolean("HasGiveEffect", false);
-
+        }
+        if (entity instanceof GiantHuskEntity giant) {
+            giant.getPersistentData().putBoolean("HasSetRain", false);
+            giant.getPersistentData().putBoolean("HasSummoned", false);
+            giant.getPersistentData().putBoolean("HasGiveEffect", false);
         }
     }
 
