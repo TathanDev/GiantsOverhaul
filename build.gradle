@@ -133,18 +133,21 @@ tasks.withType(JavaCompile).configureEach {
 publishMods {
     file = jar.archiveFile
     modLoaders.add("forge")
+    changelog = "- Add the Giant Husk\n- Fix Spawn\n- Now the player will receive an effect during the fight"
+    type = STABLE
 
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = "925734"
         minecraftVersions.add("1.20.1")
+        projectSlug = "giant-overhaul"
+
     }
     discord {
         webhookUrl = providers.environmentVariable("DISCORD_WEBHOOK")
         username = "New Mod Version !"
         avatarUrl = "https://cdn.discordapp.com/icons/978715386033877112/19162baeb87ba08f662ff3fd6f091174.webp"
-
-        content = changelog.map { "# The " + version + " Version of Giants Overhaul has been uploaded ! \n" + it}
+        content = changelog.map { "# The " + mod_version + " Version of Giants Overhaul has been uploaded ! \n" + it}
     }
 
 }
