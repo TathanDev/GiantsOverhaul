@@ -18,6 +18,8 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id "me.modmuss50.mod-publish-plugin" version "0.4.0"
+
 
 }
 
@@ -126,4 +128,23 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+publishMods {
+    file = jar.archiveFile
+    modLoaders.add("forge")
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        projectId = "925734"
+        minecraftVersions.add("1.20.1")
+    }
+    discord {
+        webhookUrl = providers.environmentVariable("DISCORD_WEBHOOK")
+        username = "New Mod Version !"
+        avatarUrl = "https://cdn.discordapp.com/icons/978715386033877112/19162baeb87ba08f662ff3fd6f091174.webp"
+
+        content = changelog.map { "# The " + version + " Version of Giants Overhaul has been uploaded ! \n" + it}
+    }
+
 }
