@@ -1,4 +1,4 @@
-package fr.tathan.giantsoverhaul.client.renderer.entity;
+package fr.tathan.giantsoverhaul.client.renderer.entity.giant_drowned;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import fr.tathan.giantsoverhaul.GiantsOverhaul;

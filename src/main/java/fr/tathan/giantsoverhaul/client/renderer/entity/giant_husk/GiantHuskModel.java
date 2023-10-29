@@ -1,20 +1,25 @@
-package fr.tathan.giantsoverhaul.client.renderer.entity;
+package fr.tathan.giantsoverhaul.client.renderer.entity.giant_husk;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import fr.tathan.giantsoverhaul.GiantsOverhaul;
 import fr.tathan.giantsoverhaul.common.entity.GiantDrownedEntity;
-import net.minecraft.client.model.*;
+import fr.tathan.giantsoverhaul.common.entity.GiantHuskEntity;
+import net.minecraft.client.model.AnimationUtils;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GiantDrownedModel<T extends GiantDrownedEntity> extends HumanoidModel<T> {
+public class GiantHuskModel<T extends GiantHuskEntity> extends HumanoidModel<T> {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(GiantsOverhaul.MODID, "giant_drowned"), "main");
 
     public final ModelPart head;
@@ -25,7 +30,7 @@ public class GiantDrownedModel<T extends GiantDrownedEntity> extends HumanoidMod
     public final ModelPart rightLeg;
     public final ModelPart leftLeg;
 
-    public GiantDrownedModel(ModelPart pRoot) {
+    public GiantHuskModel(ModelPart pRoot) {
         super(pRoot);
         this.head = pRoot.getChild("head");
         this.hat = pRoot.getChild("hat");

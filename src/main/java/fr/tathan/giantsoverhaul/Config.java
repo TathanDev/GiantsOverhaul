@@ -14,14 +14,20 @@ public class Config
             .comment("How much the giant should summon zombies")
             .defineInRange("zombiesSummoned", 5, 1,  Integer.MAX_VALUE);
 
+    private static final ForgeConfigSpec.IntValue EFFECT_RADIUS = BUILDER
+            .comment("The radius of the effect when the Giant give an effects to entities")
+            .defineInRange("effectRadius", 260, 1,  Integer.MAX_VALUE);
+
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     public static int numberOfZombies;
+    public static int effectRadius;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
-        numberOfZombies = NUMBERS_OF_ZOMBIES_SUMMONED.get();
 
+        numberOfZombies = NUMBERS_OF_ZOMBIES_SUMMONED.get();
+        effectRadius = EFFECT_RADIUS.get();
     }
 }

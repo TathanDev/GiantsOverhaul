@@ -20,7 +20,9 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownTrident;
@@ -31,9 +33,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
-public class GiantDrownedEntity extends Zombie implements RangedAttackMob {
+public class GiantHuskEntity extends Zombie {
 
-    public GiantDrownedEntity(EntityType<? extends Zombie> pEntityType, Level pLevel) {
+    public GiantHuskEntity(EntityType<? extends Zombie> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -59,19 +61,8 @@ public class GiantDrownedEntity extends Zombie implements RangedAttackMob {
         return Methods.giantsAttributes();
     }
 
-    @Override
-    public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
-        ThrownTrident throwntrident = new ThrownTrident(this.level(), this, new ItemStack(Items.TRIDENT));
-        double d0 = pTarget.getX() - this.getX();
-        double d1 = pTarget.getY(0.3333333333333333D) - throwntrident.getY();
-        double d2 = pTarget.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        throwntrident.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.DROWNED_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level().addFreshEntity(throwntrident);
-    }
 
-    public static boolean checkDrownedSpawnRules(EntityType<GiantDrownedEntity> pDrowned, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
+    public static boolean checkDrownedSpawnRules(EntityType<GiantHuskEntity> pDrowned, ServerLevelAccessor pServerLevel, MobSpawnType pMobSpawnType, BlockPos pPos, RandomSource pRandom) {
         if (!pServerLevel.getFluidState(pPos.below()).is(FluidTags.WATER)) {
             return false;
         } else {

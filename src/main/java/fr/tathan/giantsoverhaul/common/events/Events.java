@@ -2,6 +2,7 @@ package fr.tathan.giantsoverhaul.common.events;
 
 import fr.tathan.giantsoverhaul.GiantsOverhaul;
 import fr.tathan.giantsoverhaul.common.entity.GiantDrownedEntity;
+import fr.tathan.giantsoverhaul.common.entity.GiantHuskEntity;
 import fr.tathan.giantsoverhaul.common.registries.EntityRegistry;
 import fr.tathan.giantsoverhaul.common.registries.TagRegistry;
 import fr.tathan.giantsoverhaul.common.util.Methods;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Giant;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -28,15 +30,7 @@ public class Events {
     @SubscribeEvent
     public static void spawnEntity(MobSpawnEvent.FinalizeSpawn event) {
         LivingEntity entity = event.getEntity();
-        if (entity instanceof Giant giant) {
-            giant.getPersistentData().putBoolean("HasSetRain", false);
-            giant.getPersistentData().putBoolean("HasSummoned", false);
-        }
-        if (entity instanceof GiantDrownedEntity giant) {
-            giant.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
-            giant.getPersistentData().putBoolean("HasSetRain", false);
-            giant.getPersistentData().putBoolean("HasSummoned", false);
-        }
+        Methods.addTagsToGiants(entity);
     }
 
     @SubscribeEvent
@@ -70,6 +64,9 @@ public class Events {
         }
         if (entity instanceof GiantDrownedEntity giant) {
             Methods.giantDrownedBossFight(giant, level);
+        }
+        if (entity instanceof GiantHuskEntity giant) {
+            Methods.giantHuskBossFight(giant, level);
         }
     }
 
