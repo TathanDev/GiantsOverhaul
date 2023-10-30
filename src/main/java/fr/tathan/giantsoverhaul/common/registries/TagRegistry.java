@@ -9,6 +9,7 @@ public class TagRegistry {
     public static void init() {}
 
     public static final TagKey<EntityType<?>> GIANTS = tag("giants");
+    public static final TagKey<EntityType<?>> IMMUNE_TO_GIANT_EFFECT = tag("immune_to_giant_effect");
 
     private static TagKey<EntityType<?>> tag(String name)
     {

@@ -3,6 +3,7 @@ package fr.tathan.giantsoverhaul.common.util;
 import fr.tathan.giantsoverhaul.Config;
 import fr.tathan.giantsoverhaul.common.entity.GiantDrownedEntity;
 import fr.tathan.giantsoverhaul.common.entity.GiantHuskEntity;
+import fr.tathan.giantsoverhaul.common.registries.TagRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
@@ -10,10 +11,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.*;
@@ -143,10 +141,14 @@ public class Methods {
                 level.addFreshEntity(zombie);
             }
         }
-        if(giant.getHealth() < 70.0D && !giant.getPersistentData().getBoolean("HasSetRain")) {
-            Methods.setThunder(level);
-            giant.getPersistentData().putBoolean("HasSetRain", true);
+
+        if(giant.getHealth() < 70.0D && !giant.getPersistentData().getBoolean("HasThundered")) {
+            LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+            lightningBolt.moveTo(level.getNearestPlayer(giant, 50).position());
+            level.addFreshEntity(lightningBolt);
+            giant.getPersistentData().putBoolean("HasThundered", true);
         }
+
 
         if (giant.getHealth() < 25.0D && !giant.getPersistentData().getBoolean("HasGiveEffect")){
             AABB box = giant.getBoundingBox().inflate(10);
@@ -166,7 +168,6 @@ public class Methods {
     }
 
     public static void addTagsToGiants(Entity entity){
-        //TODO BETTER System for this
         if (entity instanceof Giant giant) {
             giant.getPersistentData().putBoolean("HasSetRain", false);
             giant.getPersistentData().putBoolean("HasSummoned", false);
@@ -179,7 +180,7 @@ public class Methods {
             giant.getPersistentData().putBoolean("HasGiveEffect", false);
         }
         if (entity instanceof GiantHuskEntity giant) {
-            giant.getPersistentData().putBoolean("HasSetRain", false);
+            giant.getPersistentData().putBoolean("HasThundered", false);
             giant.getPersistentData().putBoolean("HasSummoned", false);
             giant.getPersistentData().putBoolean("HasGiveEffect", false);
         }
@@ -193,6 +194,7 @@ public class Methods {
     public static void setEntitiesInAreaOnFire(AABB area, Level level, int time) {
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area);
         for (LivingEntity entity : entities) {
+            if (entity.getType().is(TagRegistry.IMMUNE_TO_GIANT_EFFECT)) return;
             entity.setSecondsOnFire(time);
         }
     }

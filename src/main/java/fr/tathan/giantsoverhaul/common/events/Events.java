@@ -43,15 +43,12 @@ public class Events {
             LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
             lightningBolt.moveTo(giant.getX(), giant.getY() + 1, giant.getZ());
             //level.addFreshEntity(lightningBolt);
-            ItemStack trident = new ItemStack(Items.TRIDENT);
             ItemEntity item = new ItemEntity(level,giant.getX(), giant.getY(), giant.getZ(), Items.TRIDENT.getDefaultInstance());
             level.addFreshEntity(item);
         }
 
         if(type.is(TagRegistry.GIANTS)) {
             Methods.setDay(level);
-
-            GiantsOverhaul.LOGGER.debug("SUN is Here !");
         }
     }
 

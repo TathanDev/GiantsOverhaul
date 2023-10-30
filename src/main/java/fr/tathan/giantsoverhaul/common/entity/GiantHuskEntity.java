@@ -67,5 +67,9 @@ public class GiantHuskEntity extends Zombie {
         return checkMonsterSpawnRules(pHusk, pLevel, pSpawnType, pPos, pRandom) && (pSpawnType == MobSpawnType.SPAWNER || pLevel.canSeeSky(pPos));
     }
 
+    @Override
+    protected boolean isSunSensitive() {
+        return false;
+    }
 
 }

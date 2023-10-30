@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:giant",
-    "giants_overhaul:giant_drowned"
+    "giants_overhaul:giant_drowned",
+    "giants_overhaul:giant_husk"
   ]
 }
