@@ -133,7 +133,7 @@ tasks.withType(JavaCompile).configureEach {
 publishMods {
     file = jar.archiveFile
     modLoaders.add("forge")
-    changelog = "- Add the Giant Husk\n- Fix Spawn\n- Now the player will receive an effect during the fight"
+    changelog = "- Giants can't add effect to them and their zombies\n- Add missing translations"
     type = STABLE
 
     curseforge {
